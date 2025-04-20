@@ -56,12 +56,13 @@ function suggetion() {
             encode      : true
         })
             .done(function(data) {
-                //console.log(data);
+                console.log(data);
                 $('#product_info').html(data).show();
                 total();
                 $('.datePicker').datepicker('update', new Date());
 
-            }).fail(function() {
+            }).fail(function(data) {
+                console.log(data);
                 $('#product_info').html(data).show();
             });
       e.preventDefault();

@@ -27,13 +27,7 @@
             <a href="#" data-toggle="dropdown" class="toggle" aria-expanded="false">
               Menu
             </a>
-            <ul class="dropdown-menu">
-              <li>
-                  <a href="profile.php?id=<?php echo (int)$user['id'];?>">
-                      <i class="glyphicon glyphicon-user"></i>
-                      Profile
-                  </a>
-              </li>
+            <ul class="dropdown-menu dropdown-menu-right">
              <li>
                  <a href="edit_account.php" title="edit account">
                      <i class="glyphicon glyphicon-cog"></i>

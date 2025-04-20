@@ -96,27 +96,6 @@ function tableExists($table){
     }
    return false;
   }
-  /*--------------------------------------------------------------*/
-  /* Login with the data provided in $_POST,
-  /* coming from the login_v2.php form.
-  /* If you used this method then remove authenticate function.
- /*--------------------------------------------------------------*/
-   function authenticate_v2($username='', $password='') {
-     global $db;
-     $username = $db->escape($username);
-     $password = $db->escape($password);
-     $sql  = sprintf("SELECT id,username,password,user_level FROM users WHERE username ='%s' LIMIT 1", $username);
-     $result = $db->query($sql);
-     if($db->num_rows($result)){
-       $user = $db->fetch_assoc($result);
-       $password_request = sha1($password);
-       if($password_request === $user['password'] ){
-         return $user;
-       }
-     }
-    return false;
-   }
-
 
   /*--------------------------------------------------------------*/
   /* Find current log in user by session id
@@ -171,17 +150,7 @@ function tableExists($table){
     return($db->num_rows($result) === 0 ? true : false);
   }
   /*--------------------------------------------------------------*/
-  /* Find group level
-  /*--------------------------------------------------------------*/
-  function find_by_groupLevel($level)
-  {
-    global $db;
-    $sql = "SELECT group_level FROM user_groups WHERE group_level = '{$db->escape($level)}' LIMIT 1 ";
-    $result = $db->query($sql);
-    return($db->num_rows($result) === 0 ? true : false);
-  }
-  /*--------------------------------------------------------------*/
-  /* Function for cheaking which user level has access to page
+  /* Function for checking if user has access to page
   /*--------------------------------------------------------------*/
    function page_require_level(){
      global $session;
@@ -196,7 +165,7 @@ function tableExists($table){
      }
    /*--------------------------------------------------------------*/
    /* Function for Finding all product name
-   /* JOIN with categorie  and media database table
+   /* JOIN with genre  and media database table
    /*--------------------------------------------------------------*/
   function join_product_table(){
      global $db;
@@ -338,6 +307,25 @@ function  monthlySales($year){
   $sql .= " GROUP BY DATE_FORMAT( s.date,  '%c' ),s.book_id";
   $sql .= " ORDER BY date_format(s.date, '%c' ) ASC";
   return find_by_sql($sql);
+}
+
+function getGenres(){
+  global $db;
+  $result =$db->query("SELECT DISTINCT name FROM genres");
+  while($row = $result->fetch_assoc()){
+      $genres[] = $row;
+  }
+  return $genres;
+
+}
+
+function getHomePageBooks($int){
+  global $db;
+  $result = $db->query("SELECT * FROM books ORDER BY rand() LIMIT $int");
+  while($row = $result->fetch_assoc()){
+      $data[] = $row;
+  }
+  return $data;
 }
 
 ?>

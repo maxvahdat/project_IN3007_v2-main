@@ -2,24 +2,23 @@
   $page_title = 'Add Sale';
   require_once('includes/load.php');
   // Checkin What level user has permission to view this page
-   page_require_level(3);
+   //page_require_level(3);
 ?>
 <?php
 
   if(isset($_POST['add_sale'])){
-    $req_fields = array('s_id','quantity','price','total', 'date' );
+    $req_fields = array('s_id','quantity', 'date' );
     validate_fields($req_fields);
         if(empty($errors)){
           $p_id      = $db->escape((int)$_POST['s_id']);
           $s_qty     = $db->escape((int)$_POST['quantity']);
-          $s_total   = $db->escape($_POST['total']);
           $date      = $db->escape($_POST['date']);
           $s_date    = make_date();
 
           $sql  = "INSERT INTO sales (";
-          $sql .= " book_id,qty,price,date";
+          $sql .= " book_id,qty,date";
           $sql .= ") VALUES (";
-          $sql .= "'{$p_id}','{$s_qty}','{$s_total}','{$s_date}'";
+          $sql .= "'{$p_id}','{$s_qty}','{$date}'";
           $sql .= ")";
 
                 if($db->query($sql)){
@@ -61,7 +60,7 @@
       <div class="panel-heading clearfix">
         <strong>
           <span class="glyphicon glyphicon-th"></span>
-          <span>Sale Eidt</span>
+          <span>Sale Edit</span>
        </strong>
       </div>
       <div class="panel-body">
@@ -69,9 +68,7 @@
          <table class="table table-bordered">
            <thead>
             <th> Item </th>
-            <th> Price </th>
             <th> Qty </th>
-            <th> Total </th>
             <th> Date</th>
             <th> Action</th>
            </thead>

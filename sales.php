@@ -1,7 +1,6 @@
 <?php
   $page_title = 'All sale';
   require_once('includes/load.php');
-  // Checkin What level user has permission to view this page
    page_require_level(3);
 ?>
 <?php
@@ -43,8 +42,11 @@ $sales = find_all_sale();
                <td class="text-center"><?php echo count_id();?></td>
                <td><?php echo remove_junk($sale['name']); ?></td>
                <td class="text-center"><?php echo (int)$sale['qty']; ?></td>
-               <td class="text-center"><?php echo remove_junk($sale['price']); ?></td>
-               <td class="text-center"><?php echo $sale['date']; ?></td>
+               <td class="text-center"><?php echo remove_junk((int)$sale['price'] * (int)$sale['qty']); ?></td>
+               <td class="text-center"><?php
+               $dateTime = new DateTime($sale["date"]);
+               echo $dateTime->format("d-m-Y"); 
+               ?></td>
                <td class="text-center">
                   <div class="btn-group">
                      <a href="edit_sale.php?id=<?php echo (int)$sale['id'];?>" class="btn btn-warning btn-xs"  title="Edit" data-toggle="tooltip">

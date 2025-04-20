@@ -5,10 +5,9 @@
    page_require_level(1);
 ?>
 <?php
- $c_categorie     = count_by_id('genres');
+ $c_genre     = count_by_id('genres');
  $c_product       = count_by_id('books');
  $c_sale          = count_by_id('sales');
- $c_user          = count_by_id('users');
  $products_sold   = find_higest_saleing_product('10');
  $recent_products = find_recent_product_added('5');
  $recent_sales    = find_recent_sale_added('5')
@@ -20,30 +19,16 @@
      <?php echo display_msg($msg); ?>
    </div>
 </div>
-  <div class="row">
-    <a href="users.php" style="color:black;">
-		<div class="col-md-3">
-       <div class="panel panel-box clearfix">
-         <div class="panel-icon pull-left bg-secondary1">
-          <i class="glyphicon glyphicon-user"></i>
-        </div>
-        <div class="panel-value pull-right">
-          <h2 class="margin-top"> <?php  echo $c_user['total']; ?> </h2>
-          <p class="text-muted">Users</p>
-        </div>
-       </div>
-    </div>
-	</a>
-	
-	<a href="categorie.php" style="color:black;">
+  <div class="row">	
+	<a href="genre.php" style="color:black;">
     <div class="col-md-3">
        <div class="panel panel-box clearfix">
          <div class="panel-icon pull-left bg-red">
           <i class="glyphicon glyphicon-th-large"></i>
         </div>
         <div class="panel-value pull-right">
-          <h2 class="margin-top"> <?php  echo $c_categorie['total']; ?> </h2>
-          <p class="text-muted">Categories</p>
+          <h2 class="margin-top"> <?php  echo $c_genre['total']; ?> </h2>
+          <p class="text-muted">genres</p>
         </div>
        </div>
     </div>
@@ -67,7 +52,7 @@
     <div class="col-md-3">
        <div class="panel panel-box clearfix">
          <div class="panel-icon pull-left bg-green">
-          <i class="glyphicon glyphicon-usd"></i>
+          <i class="glyphicon glyphicon-gbp"></i>
         </div>
         <div class="panel-value pull-right">
           <h2 class="margin-top"> <?php  echo $c_sale['total']; ?></h2>
@@ -136,8 +121,9 @@
              <?php echo remove_junk(first_character($recent_sale['name'])); ?>
            </a>
            </td>
-           <td><?php echo remove_junk(ucfirst($recent_sale['date'])); ?></td>
-           <td>$<?php echo remove_junk(first_character($recent_sale['price'])); ?></td>
+           <td><?php $dateTime = new DateTime($recent_sale["date"]); 
+           echo $dateTime->format("d-m-Y");?></td>
+           <td>£<?php echo remove_junk((int)$recent_sale['price'] * (int)$recent_sale['qty']); ?></td>
         </tr>
 
        <?php endforeach; ?>
@@ -167,7 +153,7 @@
                 <?php endif;?>
                 <?php echo remove_junk(first_character($recent_product['name']));?>
                   <span class="label label-warning pull-right">
-                 $<?php echo (int)$recent_product['price']; ?>
+                 £<?php echo (int)$recent_product['price']; ?>
                   </span>
                 </h4>
                 <span class="list-group-item-text pull-right">

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Discover a plethora of Iranian literature">
     <meta name="keywords" content="culture, history, polictics, books, iranian">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="libs/css/styles.css">
     <title>Satrap</title>
     <style>
         footer {

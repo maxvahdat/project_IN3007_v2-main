@@ -1,3 +1,4 @@
+<?php require "php/functions.php"?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Discover a plethora of Iranian literature">
     <meta name="keywords" content="culture, history, polictics, books, iranian">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="libs/css/styles.css">
     <title>Satrap</title>
 </head>
 
@@ -16,25 +17,46 @@
 
     <main>
         <div class="left">
-            <div class="section-title">Product Categories</div>
-            <a href="">Books</a>
-            <a href="">Games</a>
+            <div class="section-title">Book Genres</div>
+            <?php $genres = getGenres() ?>
+            <?php 
+                foreach($genres as $genre){
+                    ?>
+                        <a href="genre.php?genre=<?php echo urlencode($genre['name'])?>">
+                            <?php echo ucfirst($genre['name'])?>
+                        </a>
+                    <?php
+                }
+            ?>
         </div>
         <div class="right">
             <div class="section-title">Home Page</div>
-            <div class="product">
-                <div class="product-left">
-                    <img src="products/book1.avif" alt="">
+            <?php $books = getHomePageBooks(4) ?>
+            <div class="book">
+                <?php
+                    foreach($books as $book){
+                        ?>
+                                        <div class="book-left">
+                    <img src="<?php echo "books/{$book['image']}"?>" alt="">
                 </div>
-                <div class="product-right">
+                <div class="book-right">
                     <p class="title">
-                        <a href="">Iranian Book</a>
+                        <a href="book.php?title=<?php echo $book['name']?>">
+                            <?php echo $book['name'] ?>
+                        </a>
                     </p>
-                    <p class="description">lorem ipsum.</p>
+                    <p class="author">
+                        <?php echo $book['author_name'] ?>
+                    </p>
                     <p class="value">
-                        &pound; 9.99
+                        <?php echo $book['price'] ?>
                     </p>
                 </div>
+                        
+                        <?php
+                    }
+
+                ?>
             </div>
         </div>
     </main>

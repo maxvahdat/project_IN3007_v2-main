@@ -1,7 +1,7 @@
 <?php
   $page_title = 'Add Book';
   require_once('includes/load.php');
-  $all_categories = find_all('genres');
+  $all_genres = find_all('genres');
   $all_photo = find_all('media');
 ?>
 <?php
@@ -75,9 +75,9 @@
                   <div class="col-md-6">
                     <select class="form-control" name="book-genre">
                       <option value="">Select Book Genre</option>
-                    <?php  foreach ($all_categories as $cat): ?>
-                      <option value="<?php echo (int)$cat['id'] ?>">
-                        <?php echo $cat['name'] ?></option>
+                    <?php  foreach ($all_genres as $gen): ?>
+                      <option value="<?php echo (int)$gen['id'] ?>">
+                        <?php echo $gen['name'] ?></option>
                     <?php endforeach; ?>
                     </select>
                   </div>
@@ -92,7 +92,6 @@
                   </div>
                 </div>
               </div>
-
               <div class="form-group">
                <div class="row">
                  <div class="col-md-4">

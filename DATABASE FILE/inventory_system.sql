@@ -41,7 +41,7 @@ id INT PRIMARY KEY AUTO_INCREMENT,
 INSERT INTO media (file_name, file_type) VALUES ("john.png", 'image/png');
 
 INSERT INTO books (author_name, name, quantity, price, genre_id, media_id) VALUES
-('john', 'Poetry Power and Conflict', 48, 100.00, 1, 1),
+('John Doe', 'Poetry Power and Conflict', 48, 100.00, 1, 1),
 ('john', 'Iran', 12000, 55.00, 4, 1),
 ('john', 'Wheat', 69, 5.00, 2, 1),
 ('john', 'Timber', 1200, 1069.00, 2, 1),
